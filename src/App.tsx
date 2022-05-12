@@ -1,21 +1,33 @@
-import "./styles.css";
-import ICON from "./React-icon.svg";
-import { Counter } from "./Counter";
-import Button from "react-bootstrap/Button";
+// React
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+
+// Components
+import Home from "./pages/Home";
+import NewBossForm from "./pages/NewBossForm";
+
+import { initializeBosses } from "./Examples";
+import { initBossStorage } from "./Boss/Boss";
 
 export const App = () => {
+  const [showAddBoss, setShowAddBoss] = useState(true);
+
+  initBossStorage();
+  initializeBosses();
+
   return (
     <>
-      <h1>
-        React Typescript Webpack Starter Template - {process.env.NODE_ENV}{" "}
-        {process.env.name}
-      </h1>
-      <img src={ICON} alt="React Logo" width="300" />
-      <br />
-      <Button variant="primary" className="mr-1">
-        CLICK ME!
-      </Button>
-      <Counter></Counter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/add"
+            element={
+              <NewBossForm show={showAddBoss} setShow={setShowAddBoss} />
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };
