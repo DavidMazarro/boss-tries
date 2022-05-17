@@ -35,6 +35,8 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
     "@types/jest": "^27.4.1",
     "@types/react": "^18.0.6",
     "@types/react-bootstrap": "^0.32.29",

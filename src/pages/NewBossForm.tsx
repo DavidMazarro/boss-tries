@@ -1,5 +1,4 @@
 // React
-import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -102,7 +101,6 @@ const NewBossForm: React.FC<Props> = ({ show, setShow }) => {
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
       </Modal>
-      <Outlet />
     </>
   );
 };

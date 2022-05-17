@@ -6,7 +6,7 @@ const NavBar: React.FC = () => {
   return (
     <Navbar sticky="top" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Boss Tries</Navbar.Brand>
+        <Navbar.Brand href="/">Boss Tries</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
