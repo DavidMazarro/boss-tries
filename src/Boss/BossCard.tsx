@@ -2,7 +2,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useState } from "react";
 import { Boss, StorageBoss } from "../Boss/Boss";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaPenSquare, FaPlus, FaMinus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   boss: Boss;
@@ -13,8 +14,8 @@ const BossCard: React.FC<Props> = ({ boss }) => {
     localStorage.getItem("bosses") || "{}"
   );
   const storedBoss = bosses.find((x: StorageBoss) => x.boss.id === boss.id);
-  console.log(storedBoss);
   const initialTries = storedBoss?.tries || 0;
+  const navigate = useNavigate();
   const [tries, setTries] = useState(initialTries);
 
   const increaseTries = () => {
@@ -64,11 +65,21 @@ const BossCard: React.FC<Props> = ({ boss }) => {
         </Card.Title>
         <Card.Text>{storedBoss?.boss.notes || ""}</Card.Text>
         <h4>Number of tries: {tries}</h4>
-        <Button onClick={() => decreaseTries()}>-</Button>
-        <Button onClick={() => increaseTries()}>+</Button>
+        <Button onClick={() => decreaseTries()}>
+          <FaMinus />
+        </Button>
+        <Button onClick={() => increaseTries()}>
+          <FaPlus />
+        </Button>
         <Button variant="danger" onClick={() => deleteBoss()}>
           <FaTrash />
         </Button>
+        {/* <Button
+          variant="secondary"
+          onClick={() => navigate(`/edit/${boss.id}`, { replace: true })}
+        >
+          <FaPenSquare />
+        </Button> */}
       </Card.Body>
     </Card>
   );

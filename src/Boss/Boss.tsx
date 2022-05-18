@@ -16,6 +16,10 @@ export type StorageBoss = {
   tries: number;
 };
 
+export type BossAction =
+  | { action: "Create" }
+  | { action: "Edit"; bossId: number };
+
 /**
  * This function is intended to be used at the start of the app.
  * It checks if the 'nextId' and 'bosses' values are stored in

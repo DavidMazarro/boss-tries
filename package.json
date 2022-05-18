@@ -22,9 +22,9 @@
   "homepage": "https://github.com/DavidMazarro/boss-tries#readme",
   "dependencies": {
     "bootstrap": "^5.1.3",
-    "react": "^17.0.0",
+    "react": "^18.0.0",
     "react-bootstrap": "^2.3.0",
-    "react-dom": "^17.0.0",
+    "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0"
   },
@@ -58,6 +58,7 @@
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.0.0",
     "jest-localstorage-mock": "^2.4.21",
+    "jsdom": "^19.0.0",
     "prettier": "^2.6.2",
     "react-refresh": "^0.12.0",
     "style-loader": "^3.3.1",

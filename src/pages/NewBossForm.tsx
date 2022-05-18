@@ -1,24 +1,54 @@
 // React
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // React-Bootstrap
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import { storeNewBoss } from "../Boss/Boss";
+import { storeNewBoss, BossAction, StorageBoss } from "../Boss/Boss";
 import Home from "./Home";
+import {
+  ShowBossFormContext,
+  ToggleBossFormContext,
+} from "../Context/BossFormContext";
 
 type Props = {
-  show: boolean;
-  setShow: (show: React.SetStateAction<boolean>) => void;
+  bossAction: BossAction;
 };
 
-const NewBossForm: React.FC<Props> = ({ show, setShow }) => {
+const NewBossForm: React.FC<Props> = ({ bossAction }) => {
   const navigate = useNavigate();
 
-  const [newBoss, setNewBoss] = useState({ name: "", notes: "", image: "" });
+  const showBossFormContext = useContext(ShowBossFormContext);
+  const toggleBossFormContext = useContext(ToggleBossFormContext);
+
+  const initialState = (() => {
+    switch (bossAction.action) {
+      case "Create":
+        return { name: "", notes: "", image: "" };
+      case "Edit": {
+        const storedBosses: StorageBoss[] = JSON.parse(
+          localStorage.getItem("bosses") || "[]"
+        );
+        const storedBoss = storedBosses.find(
+          (x) => x.boss.id === bossAction.bossId
+        );
+        if (storedBoss != undefined) {
+          return {
+            name: storedBoss.boss.name,
+            notes: storedBoss.boss.notes,
+            image: storedBoss.boss.image,
+          };
+        } else {
+          return { name: "", notes: "", image: "" };
+        }
+      }
+    }
+  })();
+
+  const [newBoss, setNewBoss] = useState(initialState);
 
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewBoss({
@@ -45,22 +75,23 @@ const NewBossForm: React.FC<Props> = ({ show, setShow }) => {
   };
 
   const handleClose = () => {
-    setShow(false);
+    toggleBossFormContext();
     navigate("..", { replace: true });
   };
 
   const handleAddBoss = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     storeNewBoss(newBoss);
-    setShow(false);
+    toggleBossFormContext();
     navigate("..", { replace: true });
   };
+
+  console.log(`NewBossForm: showBossFormContext = ${showBossFormContext}`);
 
   return (
     <>
       <Home />
-
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={showBossFormContext} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Add new boss</Modal.Title>
         </Modal.Header>

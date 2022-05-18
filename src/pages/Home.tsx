@@ -1,4 +1,3 @@
-import "../styles.css";
 import BossCard from "../Boss/BossCard";
 import { StorageBoss } from "../Boss/Boss";
 import NavBar from "../NavBar";
@@ -26,7 +25,7 @@ const Home: React.FC = () => {
 
       <Container>
         <Row xs={1} md={4} className="g-4">
-          {data?.map((item) => (
+          {data.map((item) => (
             <Col key={item.boss.id}>
               <BossCard boss={item.boss} />
             </Col>
