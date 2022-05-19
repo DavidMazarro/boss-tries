@@ -9,10 +9,7 @@ import Form from "react-bootstrap/Form";
 
 import { storeNewBoss, BossAction, StorageBoss } from "../Boss/Boss";
 import Home from "./Home";
-import {
-  ShowBossFormContext,
-  ToggleBossFormContext,
-} from "../Context/BossFormContext";
+import { ShowBossFormContext } from "../Context/BossFormContext";
 
 type Props = {
   bossAction: BossAction;
@@ -21,8 +18,8 @@ type Props = {
 const NewBossForm: React.FC<Props> = ({ bossAction }) => {
   const navigate = useNavigate();
 
-  const showBossFormContext = useContext(ShowBossFormContext);
-  const toggleBossFormContext = useContext(ToggleBossFormContext);
+  const { showBossForm, toggleBossForm } = useContext(ShowBossFormContext);
+  console.log(showBossForm, toggleBossForm);
 
   const initialState = (() => {
     switch (bossAction.action) {
@@ -75,23 +72,23 @@ const NewBossForm: React.FC<Props> = ({ bossAction }) => {
   };
 
   const handleClose = () => {
-    toggleBossFormContext();
+    toggleBossForm();
     navigate("..", { replace: true });
   };
 
   const handleAddBoss = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     storeNewBoss(newBoss);
-    toggleBossFormContext();
+    toggleBossForm();
     navigate("..", { replace: true });
   };
 
-  console.log(`NewBossForm: showBossFormContext = ${showBossFormContext}`);
+  console.log(`NewBossForm: showBossFormContext = ${showBossForm}`);
 
   return (
     <>
       <Home />
-      <Modal show={showBossFormContext} onHide={handleClose} centered>
+      <Modal show={showBossForm} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Add new boss</Modal.Title>
         </Modal.Header>

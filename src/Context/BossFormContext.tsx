@@ -4,27 +4,25 @@ type Props = {
   children: ReactNode;
 };
 
-export const ShowBossFormContext = createContext(false);
-export const ToggleBossFormContext = createContext(() => {
-  return;
+export const ShowBossFormContext = createContext({
+  showBossForm: true,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  toggleBossForm: () => {},
 });
 export const RerenderContext = createContext(false);
 
 export const useShowBossFormContext = () => useContext(ShowBossFormContext);
-export const useToggleBossFormContext = () => useContext(ToggleBossFormContext);
 
 export const BossFormProvider: React.FC<Props> = ({ children }) => {
-  const [showBossForm, setShowBossForm] = useState(false);
+  const [showBossForm, setShowBossForm] = useState(true);
 
   const toggleBossForm = () =>
     setShowBossForm((prevShowBossForm) => !prevShowBossForm);
 
   return (
     <>
-      <ShowBossFormContext.Provider value={showBossForm}>
-        <ToggleBossFormContext.Provider value={toggleBossForm}>
-          {children}
-        </ToggleBossFormContext.Provider>
+      <ShowBossFormContext.Provider value={{ showBossForm, toggleBossForm }}>
+        {children}
       </ShowBossFormContext.Provider>
     </>
   );
