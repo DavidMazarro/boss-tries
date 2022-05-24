@@ -17,10 +17,9 @@ const Home: React.FC = () => {
       <NavBar></NavBar>
 
       <br />
-      <div className="w-50 ml-0 mr-0 mx-auto text-center">
+      <div className="w-100 ml-0 mr-0 mx-auto text-center">
         <h1>Boss tries tracker</h1>
       </div>
-      <br />
 
       <Container>
         <Row xs={1} sm={2} md={2} lg={3} xl={4} className="g-4 m-4">
