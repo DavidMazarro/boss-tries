@@ -43,11 +43,12 @@ const BossCard: React.FC<Props> = ({ boss }) => {
   };
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card className="card">
       <Card.Img
-        style={{ width: "287px", height: "287px", objectFit: "cover" }}
+        style={{ height: "287px", objectFit: "cover" }}
         variant="top"
         src={boss.image}
+        alt="Image could not be loaded"
       />
       <Card.Body>
         <Card.Title style={{ fontSize: "25px", textAlign: "center" }}>

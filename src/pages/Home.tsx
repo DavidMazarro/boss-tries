@@ -23,7 +23,7 @@ const Home: React.FC = () => {
       <br />
 
       <Container>
-        <Row xs={1} md={4} className="g-4">
+        <Row xs={1} sm={2} md={2} lg={3} xl={4} className="g-4 m-4">
           {bosses.map((item) => (
             <Col key={item.boss.id}>
               <BossCard boss={item.boss} />
