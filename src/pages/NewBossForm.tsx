@@ -87,8 +87,6 @@ const NewBossForm: React.FC<Props> = ({ bossAction }) => {
     navigate("..", { replace: true });
   };
 
-  console.log(`NewBossForm: showBossFormContext = ${showBossForm}`);
-
   return (
     <>
       <Home />
