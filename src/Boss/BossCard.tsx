@@ -11,6 +11,7 @@ type Props = {
 };
 
 const BossCard: React.FC<Props> = ({ boss }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { bosses, loadBosses, storeBosses } = useContext(BossesContext);
   const storedBoss = bosses.find((x: StorageBoss) => x.boss.id === boss.id);
   const initialTries = storedBoss?.tries || 0;

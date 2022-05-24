@@ -21,6 +21,7 @@ const NewBossForm: React.FC<Props> = ({ bossAction }) => {
 
   const { showBossForm, toggleBossForm } = useContext(ShowBossFormContext);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { bosses, loadBosses, storeBosses } = useContext(BossesContext);
 
   const initialState = (() => {
