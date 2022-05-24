@@ -1,5 +1,6 @@
+import { useContext } from "react";
+import { BossesContext } from "../Context/BossesContext";
 import BossCard from "../Boss/BossCard";
-import { StorageBoss } from "../Boss/Boss";
 import NavBar from "../NavBar";
 
 // React-Bootstrap imports
@@ -8,10 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const Home: React.FC = () => {
-  // Retrieves the bosses that are stored in the localStorage.
-  const data: StorageBoss[] = JSON.parse(
-    localStorage.getItem("bosses") || "{}"
-  );
+  const { bosses, loadBosses, storeBosses } = useContext(BossesContext);
 
   return (
     <>
@@ -25,7 +23,7 @@ const Home: React.FC = () => {
 
       <Container>
         <Row xs={1} md={4} className="g-4">
-          {data.map((item) => (
+          {bosses.map((item) => (
             <Col key={item.boss.id}>
               <BossCard boss={item.boss} />
             </Col>

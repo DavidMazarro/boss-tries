@@ -9,7 +9,6 @@ export const ShowBossFormContext = createContext({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   toggleBossForm: () => {},
 });
-export const RerenderContext = createContext(false);
 
 export const useShowBossFormContext = () => useContext(ShowBossFormContext);
 

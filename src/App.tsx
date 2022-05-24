@@ -8,6 +8,7 @@ import NewBossForm from "./pages/NewBossForm";
 import { initializeBosses } from "./Examples";
 import { initBossStorage } from "./Boss/Boss";
 import { BossFormProvider } from "./Context/BossFormContext";
+import { BossesProvider } from "./Context/BossesContext";
 
 export const App = () => {
   // const { id } = useParams();
@@ -18,14 +19,15 @@ export const App = () => {
   return (
     <>
       <BossFormProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/add"
-              element={<NewBossForm bossAction={{ action: "Create" }} />}
-            />
-            {/* <Route
+        <BossesProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/add"
+                element={<NewBossForm bossAction={{ action: "Create" }} />}
+              />
+              {/* <Route
             path="/edit/:id"
             element={
               <NewBossForm
@@ -35,8 +37,9 @@ export const App = () => {
               />
             }
           /> */}
-          </Routes>
-        </BrowserRouter>
+            </Routes>
+          </BrowserRouter>
+        </BossesProvider>
       </BossFormProvider>
     </>
   );

@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import { storeNewBoss, BossAction, StorageBoss } from "../Boss/Boss";
 import Home from "./Home";
 import { ShowBossFormContext } from "../Context/BossFormContext";
+import { BossesContext } from "../Context/BossesContext";
 
 type Props = {
   bossAction: BossAction;
@@ -19,7 +20,8 @@ const NewBossForm: React.FC<Props> = ({ bossAction }) => {
   const navigate = useNavigate();
 
   const { showBossForm, toggleBossForm } = useContext(ShowBossFormContext);
-  console.log(showBossForm, toggleBossForm);
+
+  const { bosses, loadBosses, storeBosses } = useContext(BossesContext);
 
   const initialState = (() => {
     switch (bossAction.action) {
@@ -79,6 +81,7 @@ const NewBossForm: React.FC<Props> = ({ bossAction }) => {
   const handleAddBoss = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     storeNewBoss(newBoss);
+    loadBosses();
     toggleBossForm();
     navigate("..", { replace: true });
   };

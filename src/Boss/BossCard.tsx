@@ -1,18 +1,17 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Boss, StorageBoss } from "../Boss/Boss";
 import { FaTrash, FaPenSquare, FaPlus, FaMinus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { BossesContext } from "../Context/BossesContext";
 
 type Props = {
   boss: Boss;
 };
 
 const BossCard: React.FC<Props> = ({ boss }) => {
-  const bosses: StorageBoss[] = JSON.parse(
-    localStorage.getItem("bosses") || "{}"
-  );
+  const { bosses, loadBosses, storeBosses } = useContext(BossesContext);
   const storedBoss = bosses.find((x: StorageBoss) => x.boss.id === boss.id);
   const initialTries = storedBoss?.tries || 0;
   const navigate = useNavigate();
@@ -20,36 +19,26 @@ const BossCard: React.FC<Props> = ({ boss }) => {
 
   const increaseTries = () => {
     setTries((prevTries) => prevTries + 1);
-    localStorage.setItem(
-      "bosses",
-      JSON.stringify(
-        bosses.map((x) => {
-          if (x.boss.id === boss.id) x.tries = tries + 1;
-          return x;
-        })
-      )
+    storeBosses(
+      bosses.map((x) => {
+        if (x.boss.id === boss.id) x.tries = tries + 1;
+        return x;
+      })
     );
   };
 
   const decreaseTries = () => {
     setTries((prevTries) => (prevTries <= 0 ? 0 : prevTries - 1));
-    localStorage.setItem(
-      "bosses",
-      JSON.stringify(
-        bosses.map((x) => {
-          if (x.boss.id === boss.id) x.tries = tries <= 0 ? 0 : tries - 1;
-          return x;
-        })
-      )
+    storeBosses(
+      bosses.map((x) => {
+        if (x.boss.id === boss.id) x.tries = tries <= 0 ? 0 : tries - 1;
+        return x;
+      })
     );
   };
 
   const deleteBoss = () => {
-    localStorage.setItem(
-      "bosses",
-      JSON.stringify(bosses.filter((x) => x.boss.id != boss.id))
-    );
-    // how to re-render component here?
+    storeBosses(bosses.filter((x) => x.boss.id != boss.id));
   };
 
   return (
